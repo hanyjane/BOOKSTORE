@@ -80,7 +80,9 @@ namespace BOOKSTORE
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Account created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearForm();
+                            Login loginForm = new Login(); // create instance of Register form
+                            loginForm.Show();                    // show the Register form
+                            this.Hide();
                         }
                         else
                         {
@@ -95,15 +97,7 @@ namespace BOOKSTORE
             }
         }
 
-        // Helper method to clear the form
-        private void ClearForm()
-        {
-            txtUsername.Clear();
-            txtEmail.Clear();
-            txtPassword.Clear();
-            txtConfirmPassword.Clear();
-        }
-   
+       
         private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             bool show = chkShowPassword.Checked;

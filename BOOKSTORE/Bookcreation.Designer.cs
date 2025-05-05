@@ -45,6 +45,7 @@
             this.cmbCategory = new System.Windows.Forms.ComboBox();
             this.btn_confirm = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_Back = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -193,11 +194,22 @@
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
+            // btn_Back
+            // 
+            this.btn_Back.Location = new System.Drawing.Point(12, 12);
+            this.btn_Back.Name = "btn_Back";
+            this.btn_Back.Size = new System.Drawing.Size(75, 23);
+            this.btn_Back.TabIndex = 17;
+            this.btn_Back.Text = "back";
+            this.btn_Back.UseVisualStyleBackColor = true;
+            this.btn_Back.Click += new System.EventHandler(this.btn_Back_Click);
+            // 
             // Bookcreation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btn_confirm);
             this.Controls.Add(this.cmbCategory);
@@ -242,5 +254,6 @@
         private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.Button btn_confirm;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btn_Back;
     }
 }

@@ -75,5 +75,12 @@ namespace BOOKSTORE
                 MessageBox.Show("Error saving book: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btn_Back_Click(object sender, EventArgs e)
+        {
+            mainform main = new mainform(); // create instance of Register form
+            main.Show();                    // show the Register form
+            this.Hide();
+        }
     }
 }
