@@ -24,14 +24,14 @@ namespace BOOKSTORE
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Check if passwords match
+          
             if (txtPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show("Passwords don't match!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Check if required fields are filled
+            
             if (string.IsNullOrWhiteSpace(txtUsername.Text) ||
                 string.IsNullOrWhiteSpace(txtEmail.Text) ||
                 string.IsNullOrWhiteSpace(txtPassword.Text))
@@ -40,7 +40,7 @@ namespace BOOKSTORE
                 return;
             }
 
-            // Validate email format
+           
             if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
             {
                 MessageBox.Show("Please enter a valid email address!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -53,7 +53,7 @@ namespace BOOKSTORE
                 {
                     connection.Open();
 
-                    // First check if email already exists
+                    
                     string checkEmailQuery = "SELECT COUNT(*) FROM Users WHERE Email = ?";
                     using (OleDbCommand checkCommand = new OleDbCommand(checkEmailQuery, connection))
                     {
@@ -67,7 +67,7 @@ namespace BOOKSTORE
                         }
                     }
 
-                    // If email doesn't exist, proceed with registration
+                   
                     string insertQuery = "INSERT INTO Users (Username, Email, [Password]) VALUES (?, ?, ?)";
                     using (OleDbCommand command = new OleDbCommand(insertQuery, connection))
                     {
@@ -80,8 +80,8 @@ namespace BOOKSTORE
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Account created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Login loginForm = new Login(); // create instance of Register form
-                            loginForm.Show();                    // show the Register form
+                            Login loginForm = new Login(); 
+                            loginForm.Show();                   
                             this.Hide();
                         }
                         else

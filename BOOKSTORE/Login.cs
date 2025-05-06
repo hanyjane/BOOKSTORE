@@ -22,7 +22,7 @@ namespace BOOKSTORE
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Check if required fields are filled
+            
             if (string.IsNullOrWhiteSpace(l.Text) ||
                 string.IsNullOrWhiteSpace(pass.Text))
             {
@@ -37,7 +37,7 @@ namespace BOOKSTORE
                 {
                     connection.Open();
 
-                    // Query to check if credentials match
+                   
                     string loginQuery = "SELECT Username FROM Users WHERE Email = ? AND [Password] = ?";
 
                     using (OleDbCommand command = new OleDbCommand(loginQuery, connection))
@@ -45,16 +45,16 @@ namespace BOOKSTORE
                         command.Parameters.AddWithValue("?", txtLoginEmail.Text);
                         command.Parameters.AddWithValue("?", txtLoginPassword.Text);
 
-                        // Execute the query
+                       
                         object result = command.ExecuteScalar();
 
-                        if (result != null) // If we got a match
+                        if (result != null) 
                         {
                             string username = result.ToString();
                             MessageBox.Show($"Welcome back, {username}!", "Login Successful",
                                           MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            // Open main form or do something after successful login
+                           
                            mainform mainForm = new mainform();
                             mainForm.Show();
                             this.Hide();

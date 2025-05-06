@@ -28,7 +28,7 @@ namespace BOOKSTORE
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 imagepath.Text = ofd.FileName;
-                pictureBox1.Image = Image.FromFile(ofd.FileName); // optional
+                pictureBox1.Image = Image.FromFile(ofd.FileName); 
             }
         }
 
@@ -78,8 +78,8 @@ namespace BOOKSTORE
 
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            mainform main = new mainform(); // create instance of Register form
-            main.Show();                    // show the Register form
+            mainform main = new mainform(); 
+            main.Show();                    
             this.Hide();
         }
     }
