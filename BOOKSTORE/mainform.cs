@@ -13,6 +13,8 @@ namespace BOOKSTORE
 {
     public partial class mainform : Form
     {
+        private string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\reyneil\Desktop\Database11.accdb";
+
         public mainform()
         {
             InitializeComponent();
@@ -21,40 +23,37 @@ namespace BOOKSTORE
 
         private void mainform_Load(object sender, EventArgs e)
         {
-            var books = LoadBooksFromDatabase();
-            foreach (var book in books)
+            List<Book> bookList = LoadBooksFromDatabase();
+
+            for (int i = 0; i < bookList.Count; i++)
             {
+                Book book = bookList[i];
                 AddBookToUI(book);
             }
-            
         }
-
 
         private List<Book> LoadBooksFromDatabase()
         {
             List<Book> books = new List<Book>();
 
-            using (OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\reyneil\Desktop\Database11.accdb"))
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
             {
                 conn.Open();
-                string query = "SELECT ID, Category, Title, ISBN, Author, Stock, Price, BookCover FROM Books";
+   
+                string query = "SELECT ID, Category, Title, Author, BookCover FROM Books";
 
                 using (OleDbCommand cmd = new OleDbCommand(query, conn))
                 using (OleDbDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        books.Add(new Book
-                        {
-                            Id = reader.GetInt32(0),
-                            Category = reader.GetString(1),
-                            Title = reader.GetString(2),
-                            ISBN = reader.GetString(3),
-                            Author = reader.GetString(4),
-                            Stock = reader.GetInt32(5),
-                            Price = reader.GetDecimal(6),
-                            BookCover = reader.IsDBNull(7) ? null : (byte[])reader[7]
-                        });
+                        Book book = new Book();
+                        book.Id = reader.GetInt32(0);
+                        book.Category = reader.GetString(1);
+                        book.Title = reader.GetString(2);
+                        book.Author = reader.GetString(3);
+                        book.BookCover = reader.IsDBNull(4) ? null : (byte[])reader[4];
+                        books.Add(book);
                     }
                 }
             }
@@ -64,77 +63,45 @@ namespace BOOKSTORE
 
         private void AddBookToUI(Book book)
         {
-            Panel panel = new Panel
-            {
-                Size = new Size(150, 270),
-                Margin = new Padding(10),
-                BackColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle
-            };
+            Panel panel = new Panel();
+            panel.Size = new Size(150, 220);
+            panel.BackColor = Color.White;
 
-            PictureBox picBox = new PictureBox
-            {
-                Size = new Size(110, 130),
-                Location = new Point(20, 10),
-                SizeMode = PictureBoxSizeMode.Zoom
-            };
+            PictureBox picture = new PictureBox();
+            picture.Size = new Size(100, 120);
+            picture.Location = new Point(25, 10);
+            picture.SizeMode = PictureBoxSizeMode.Zoom;
 
             if (book.BookCover != null)
             {
-                using (MemoryStream ms = new MemoryStream(book.BookCover))
-                {
-                    picBox.Image = Image.FromStream(ms);
-                }
+                MemoryStream ms = new MemoryStream(book.BookCover);
+                picture.Image = Image.FromStream(ms);
             }
 
-            Label lblTitle = new Label
-            {
-                Text = book.Title,
-                Location = new Point(10, 150),
-                AutoSize = true
-            };
+            Label titleLabel = new Label();
+            titleLabel.Text = book.Title;
+            titleLabel.Location = new Point(10, 140);
+            titleLabel.AutoSize = true;
 
-            Label lblAuthor = new Label
-            {
-                Text = "By " + book.Author,
-                Location = new Point(10, 170),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 8, FontStyle.Italic),
-                ForeColor = Color.DarkGray
-            };
+            Label authorLabel = new Label();
+            authorLabel.Text = "By " + book.Author;
+            authorLabel.Location = new Point(10, 160);
+            authorLabel.AutoSize = true;
 
-            Label lblPrice = new Label
-            {
-                Text = "₱" + book.Price.ToString("0.00"),
-                Location = new Point(10, 190),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 9, FontStyle.Bold)
-            };
-
-            Label lblStock = new Label
-            {
-                Text = "Stock: " + book.Stock,
-                Location = new Point(10, 210),
-                AutoSize = true
-            };
-
-            panel.Controls.Add(picBox);
-            panel.Controls.Add(lblTitle);
-            panel.Controls.Add(lblAuthor);
-            panel.Controls.Add(lblPrice);
-            panel.Controls.Add(lblStock);
-           
+            panel.Controls.Add(picture);
+            panel.Controls.Add(titleLabel);
+            panel.Controls.Add(authorLabel);
 
             flowLayoutPanel1.Controls.Add(panel);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Bookcreation bookcreationform = new Bookcreation(); // create instance of Register form
-            bookcreationform.Show();                    // show the Register form
+            Bookcreation form = new Bookcreation();
+            form.Show();
             this.Hide();
         }
+    
     }
 
-    // Book class (can be placed in a separate Book.cs file)
 }
