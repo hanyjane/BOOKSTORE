@@ -34,21 +34,23 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(330, 113);
+            this.button1.Location = new System.Drawing.Point(336, 137);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(175, 72);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "login";
+            this.button1.Size = new System.Drawing.Size(114, 47);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(330, 238);
+            this.button2.Location = new System.Drawing.Point(336, 221);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(175, 72);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "register";
+            this.button2.Size = new System.Drawing.Size(114, 69);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // Form1
             // 
@@ -64,8 +66,8 @@
         }
 
         #endregion
+
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
     }
 }
-

@@ -15,7 +15,7 @@ namespace BOOKSTORE
     {
         private string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\reyneil\Desktop\Database11.accdb;";
 
-        public Register()
+        public Register()//test
         {
             InitializeComponent();
             txtPassword.UseSystemPasswordChar = true;
